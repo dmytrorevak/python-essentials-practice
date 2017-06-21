@@ -7,25 +7,25 @@ def integet_number_validation(entered_number):
 
 
 def count_sum_of_number(number):
-    number_length = len(number)
-    integer_number = int(number)
+    number_length = len(str(number))
     result = 0
 
     for i in range(number_length):
         сurrent_bit_of_number = 10 ** (number_length - (i + 1))
-        current_add = integer_number // сurrent_bit_of_number
+        current_add = number // сurrent_bit_of_number
         result += current_add
-        integer_number -= current_add * сurrent_bit_of_number
+        number -= current_add * сurrent_bit_of_number
 
     return result
 
 
 if __name__ == '__main__':
+
     entered_number = input("Please, enter some integer number: ")
 
     is_entered_number_valid = integet_number_validation(entered_number)
 
     if is_entered_number_valid:
-        print(count_sum_of_number(entered_number))
+        print(count_sum_of_number(int(entered_number)))
     else:
         print("You have entered not integer number!")
