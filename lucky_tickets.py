@@ -1,0 +1,3 @@
+from sum_of_number import count_sum_of_number
+
+print(count_sum_of_number)
