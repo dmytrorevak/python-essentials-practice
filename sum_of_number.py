@@ -20,11 +20,12 @@ def count_sum_of_number(number):
     return result
 
 
-entered_number = input("Please, enter some integer number: ")
+if __name__ == '__main__':
+    entered_number = input("Please, enter some integer number: ")
 
-is_entered_number_valid = integet_number_validation(entered_number)
+    is_entered_number_valid = integet_number_validation(entered_number)
 
-if is_entered_number_valid:
-    print(count_sum_of_number(entered_number))
-else:
-    print("You have entered not integer number!")
+    if is_entered_number_valid:
+        print(count_sum_of_number(entered_number))
+    else:
+        print("You have entered not integer number!")
