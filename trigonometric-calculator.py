@@ -1,72 +1,124 @@
+import math
+import decimal
+
+
 class Calculator():
 
-    __first_argument = None
-    __second_argument = None
-    __mathematical_operation = None
-    __result = None
-    __continue_calculating = True
+    def __init__(self):
+        self.first_argument = None
+        self.second_argument = None
+        self.mathematical_operation = None
+        self.result = None
+        self.continue_calculating = True
+        self.one_argument_operations = ["cos", "sin", "tan", "sqrt"]
+        self.two_argument_operations = ["+", "-", "*", "/", "%", "pow"]
 
-    def __addition(self):
-        return self.__first_argument + self.__second_argument
+    def addition(self):
+        return self.first_argument + self.second_argument
 
-    def __subtraction(self):
-        return self.__first_argument - self.__second_argument
+    def subtraction(self):
+        return self.first_argument - self.second_argument
 
-    def __multiplication(self):
-        return self.__first_argument * self.__second_argument
+    def multiplication(self):
+        return self.first_argument * self.second_argument
 
-    def __division(self):
-        return self.__first_argument / self.__second_argument
+    def division(self):
+        return self.first_argument / self.second_argument
 
-    def __division_with_rest(self):
-        return self.__first_argument % self.__second_argument
+    def division_with_rest(self):
+        return self.first_argument % self.second_argument
 
-    def __get_input_information(self):
-        self.__first_argument = float(input("Please, "
-                                            "enter the first argument: "))
+    def pow(self):
+        return math.pow(self.first_argument, self.second_argument)
 
-        self.__mathematical_operation = input("Please, choose the mathematical"
-                                              " operation (+ - * / %): ")
+    def sqrt(self):
+        return math.sqrt(self.first_argument)
 
-        self.__second_argument = float(input("Please, "
-                                             "enter the second argument: "))
+    def sin(self):
+        return math.sin(self.first_argument)
 
-    def __calculation(self):
-        choosed_operator = self.__mathematical_operation
+    def cos(self):
+        return math.cos(self.first_argument)
+
+    def tan(self):
+        return math.tan(self.first_argument)
+
+    def validate_input_argument(self, data):
+        try:
+            float(data)
+            return True
+        except ValueError:
+            print("You have entered incorrect value! Please, try again.")
+            return False
+
+    def get_argument_input(self, argument):
+        user_input = input("Please, enter the " + argument + " : ")
+        is_input_valid = self.validate_input_argument(user_input)
+
+        if is_input_valid:
+            setattr(self, argument, float(user_input))
+        else:
+            self.get_argument_input(argument)
+
+    def get_mathematical_operation(self):
+        self.mathematical_operation = input("Please, choose the mathematical"
+                                            " operation (+ - * / % pow sqrt "
+                                            "cos sin tan): ")
+        if self.mathematical_operation not in (self.one_argument_operations and
+                                               self.two_argument_operations):
+            print("You have entered incorrect mathematical operator! "
+                  "Please, try again")
+            self.get_mathematical_operation()
+
+    def get_calculating_information(self):
+        self.get_argument_input('first_argument')
+        self.get_mathematical_operation()
+        if self.mathematical_operation not in self.one_argument_operations:
+            self.get_argument_input('second_argument')
+
+    def calculation(self):
+        choosed_operator = self.mathematical_operation
 
         if choosed_operator == "+":
-            self.__result = self.__addition()
+            self.result = self.addition()
         elif choosed_operator == "-":
-            self.__result = self.__subtraction()
+            self.result = self.subtraction()
         elif choosed_operator == "*":
-            self.__result = self.__multiplication()
+            self.result = self.multiplication()
         elif choosed_operator == "/":
-            self.__result = self.__division()
+            self.result = self.division()
         elif choosed_operator == "%":
-            self.__result = self.__division_with_rest()
+            self.result = self.division_with_rest()
+        elif choosed_operator == "pow":
+            self.result = self.pow()
+        elif choosed_operator == "sqrt":
+            self.result = self.sqrt()
+        elif choosed_operator == "sin":
+            self.result = self.sin()
+        elif choosed_operator == "cos":
+            self.result = self.cos()
         else:
-            print("You have entered incorrect mathematical operator!")
+            self.result = self.tan()
 
-    def __show_result(self):
-        print(self.__result)
+    def show_result(self):
+        print("Your result is: " + "{0:.3f}".format(self.result))
 
-    def __ask_for_continue(self):
+    def ask_for_continue(self):
         user_continue_answer = input("Please, enter 'yes' if "
                                      "you want to calculate something else: ")
 
         if user_continue_answer != "yes":
-            self.__continue_calculating = False
+            self.continue_calculating = False
 
     def implement_calculator(self):
-        while self.__continue_calculating is True:
-            self.__get_input_information()
-            self.__calculation()
-            self.__show_result()
-            self.__ask_for_continue()
+        while self.continue_calculating is True:
+            self.get_calculating_information()
+            self.calculation()
+            self.show_result()
+            self.ask_for_continue()
 
 
 if __name__ == '__main__':
 
     calculator = Calculator()
     calculator.implement_calculator()
-    # calculator.__addition()
