@@ -105,8 +105,8 @@ class ShowAllKindsOfNumbers(ShowBiggestNumbers):
         self.positive_numbers = [i for i in self.user_numbers if i > 0]
 
     def show_amount_of_positive_numbers(self):
-        print("Amount of positive numbers is: " 
-              + str(len(self.positive_numbers)))
+        print("Amount of positive numbers "
+              "is: " + str(len(self.positive_numbers)))
 
     def implement_all_kinds_of_numbers(self):
         super().implement_biggest_number()
