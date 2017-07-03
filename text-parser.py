@@ -5,6 +5,7 @@ class TextParser():
 
     def __init__(self):
         self.file = None
+        self.file_text = None
         self.list_of_words = None
         self.all_text_letters = None
         self.amount_of_lines = None
@@ -14,7 +15,9 @@ class TextParser():
         self.amount_of_consonants = None
 
     def open_file(self, file_to_open):
-        self.file = open(file_to_open).read()
+        self.file = open(file_to_open)
+        print(self.file)
+        self.file_text = open(file_to_open).read()
 
     def count_lines(self):
         lines_counter = 0
@@ -22,11 +25,20 @@ class TextParser():
         for line in self.file:
             lines_counter += 1
 
-        self.amount_of_lines = lines_counter
+        self.amount_of_lines = lines_counter + 1
 
     def count_words(self):
-        words_string = re.sub(r"[\n\t\-\,\.\:\;\'\d]+", "", self.file)
-        self.list_of_words = words_string.split(" ")
+        letters_spaces_list = []
+
+        for char in self.file_text:
+            if char.isalnum():
+                letters_spaces_list.append(char)
+            else:
+                letters_spaces_list.append(' ')
+
+        letters_spaces_string = "".join(letters_spaces_list)
+        clear_text = re.sub(r"\s+", " ", letters_spaces_string)
+        self.list_of_words = clear_text.split(" ")
         self.amount_of_words = len(self.list_of_words)
 
     def count_unique_words(self):
@@ -34,11 +46,10 @@ class TextParser():
         self.amount_of_unique_words = len(list_of_unique_words)
 
     def set_all_text_letters(self):
-        self.all_text_letters = re.findall(r"[A-Za-z]", self.file)
+        self.all_text_letters = str(re.findall(r"[A-Za-z]", self.file_text))
 
     def count_vowel_letters(self):
-        all_string_letters = str(self.all_text_letters)
-        all_vowel_letters = re.findall(r"[AaEeIiOoUu]", all_string_letters)
+        all_vowel_letters = re.findall(r"[AaEeIiOoUu]", self.all_text_letters)
         self.amount_of_vowels = len(all_vowel_letters)
 
     def count_consonants_letters(self):
