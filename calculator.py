@@ -1,11 +1,6 @@
 print("What operation do you want to accomplish ?")
-<<<<<<< HEAD
 user_choice = input("+ - * / % \n")
 if user_choice == "+":
-=======
-user_choiсe = input("+ - * / % \n")
-if user_choiсe == "+":
->>>>>>> 57075f660d222f325d1b447f9ebaf40944e166be
     first_addition = float(input("Please enter the first addition "))
     second_addition = float(input("Please enter the second addition "))
     total_sum = str(first_addition + second_addition)
