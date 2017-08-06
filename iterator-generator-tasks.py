@@ -1,3 +1,5 @@
+"""Create reverse iterator and generator"""
+
 # class ReverseIterator():
 
 #     def __init__(self, list_object):
@@ -22,6 +24,7 @@
 #     for i in range(list_length - 1, -1, -1):
 #         yield list_object[i]
 
+"""Tests for reverse iterator and generator"""
 
 # alphabet_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
 # numeric_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -36,17 +39,19 @@
           # 'Generator items: {2}, {3}'.format(i, j, x, y))
 
 
-# -----------------------------------------------------------------------------------------------
-
-def read_files(filemanes):
-    for file in filemanes:
-        file = open(file)
-        for line in file:
-            yield line
+"""Create generator which yields lines that have less than 40 chars"""
 
 
-all_files_lines = read_files(['test.txt', 'test1.txt', 'test2.txt'])
-lines = (line for line in all_files_lines if len(line) <= 40)
+# def read_files(filemanes):
+#     for file in filemanes:
+#         file = open(file)
+#         for line in file:
+#             yield line
 
-for line in lines:
-    print(line)
+
+# all_files_lines = read_files(['test.txt', 'test1.txt', 'test2.txt'])
+# lines = (line for line in all_files_lines if len(line) <= 40)
+
+# for line in lines:
+#     print(line)
+
