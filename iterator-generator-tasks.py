@@ -1,4 +1,8 @@
+import os
+
+
 """Create reverse iterator and generator"""
+
 
 # class ReverseIterator():
 
@@ -55,3 +59,18 @@
 # for line in lines:
 #     print(line)
 
+
+"""Create function which recursively descends the directory tree for the
+specified directory and generates paths of all the files in the tree
+"""
+
+
+def find_files_paths(directory):
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            yield os.path.join(root, file)
+
+
+files = find_files_paths(os.getcwd())
+for file in files:
+    print(file)
