@@ -65,12 +65,45 @@ specified directory and generates paths of all the files in the tree
 """
 
 
-def find_files_paths(directory):
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            yield os.path.join(root, file)
+# def find_files_paths(directory):
+#     for root, dirs, files in os.walk(directory):
+#         for file in files:
+#             yield os.path.join(root, file)
 
 
-files = find_files_paths(os.getcwd())
-for file in files:
-    print(file)
+# files = find_files_paths(os.getcwd())
+# for file in files:
+#     print(file)
+
+
+"""Write the class which computes the number of python files
+(.py extension) in a specified directory recursively.
+"""
+
+
+class PythonFilesCounter():
+
+    def __init__(self, directory):
+        self.start_directory = directory
+        self.files = self.get_all_files(self.start_directory)
+        self.files_counter = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        file = self.files.__next__()
+        file_extention = os.path.splitext(file)[1]
+        if file_extention == '.py':
+            self.files_counter += 1
+
+    def get_all_files(self, directory):
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                yield file
+
+
+pfc = PythonFilesCounter(os.getcwd())
+for i in pfc:
+    pass
+print('Amount of python files is: ' + str(pfc.files_counter))
